@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4F8FA8;
+  --color-primary-dark: #3a7a95;
+  --color-secondary: #C9A46A;
+  --color-secondary-dark: #b8904f;
+  --color-sand: #F5F1E8;
+  --color-sand-dark: #e8e3d8;
+  --color-navy: #1E3A4A;
+  --color-navy-light: #2a4f65;
+}
+
+@theme inline {
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  background-color: #F5F1E8;
+  color: #1E3A4A;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+/* Scroll offset for fixed navbar */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+@keyframes wave-shimmer {
+  0%,
+  100% {
+    filter: brightness(0.85) saturate(1.1);
+  }
+  50% {
+    filter: brightness(1.05) saturate(0.95);
+  }
+}
+
+@keyframes float-up {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.5;
+  }
+}
+
+.animate-wave-shimmer {
+  animation: wave-shimmer 6s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+.animate-scroll-bounce {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
