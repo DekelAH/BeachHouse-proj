@@ -66,7 +66,10 @@ export default function Contact() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: '', email: '', phone: '', message: '' },
+  })
 
   const onSubmit = async (data: FormData) => {
     setSubmitState('loading')
@@ -185,15 +188,18 @@ export default function Contact() {
                 <label htmlFor="name" className="block text-navy font-medium text-sm mb-1.5">
                   Full Name <span className="text-red-400">*</span>
                 </label>
-                <motion.input
-                  id="name"
-                  type="text"
-                  placeholder="Your full name"
-                  {...register('name')}
+                <motion.div
                   animate={errors.name ? { x: [-4, 4, -4, 4, 0] } : {}}
                   transition={{ duration: 0.3 }}
-                  className={inputClass(!!errors.name)}
-                />
+                >
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="Your full name"
+                    {...register('name')}
+                    className={inputClass(!!errors.name)}
+                  />
+                </motion.div>
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
                 )}
@@ -204,15 +210,18 @@ export default function Contact() {
                 <label htmlFor="email" className="block text-navy font-medium text-sm mb-1.5">
                   Email Address <span className="text-red-400">*</span>
                 </label>
-                <motion.input
-                  id="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  {...register('email')}
+                <motion.div
                   animate={errors.email ? { x: [-4, 4, -4, 4, 0] } : {}}
                   transition={{ duration: 0.3 }}
-                  className={inputClass(!!errors.email)}
-                />
+                >
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    {...register('email')}
+                    className={inputClass(!!errors.email)}
+                  />
+                </motion.div>
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
                 )}
@@ -237,15 +246,18 @@ export default function Contact() {
                 <label htmlFor="message" className="block text-navy font-medium text-sm mb-1.5">
                   Message <span className="text-red-400">*</span>
                 </label>
-                <motion.textarea
-                  id="message"
-                  rows={4}
-                  placeholder="How can we help you?"
-                  {...register('message')}
+                <motion.div
                   animate={errors.message ? { x: [-4, 4, -4, 4, 0] } : {}}
                   transition={{ duration: 0.3 }}
-                  className={`${inputClass(!!errors.message)} resize-none`}
-                />
+                >
+                  <textarea
+                    id="message"
+                    rows={4}
+                    placeholder="How can we help you?"
+                    {...register('message')}
+                    className={`${inputClass(!!errors.message)} resize-none`}
+                  />
+                </motion.div>
                 {errors.message && (
                   <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
                 )}

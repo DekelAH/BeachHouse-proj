@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useMotionValue, animate } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { fadeInUp, stagger } from '@/lib/animations'
 
 const reviews = [
@@ -160,7 +160,7 @@ export default function Reviews() {
               <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H7.9c.1-.6.5-2 2.1-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6.1c.1-.6.5-2 2.1-2V8z" />
             </svg>
 
-            <div className="h-[260px] sm:h-[220px] flex flex-col justify-center relative">
+            <div className="min-h-[280px] sm:min-h-[220px] flex flex-col justify-center relative">
               <AnimatePresence custom={direction} mode="wait">
                 <motion.div
                   key={current}

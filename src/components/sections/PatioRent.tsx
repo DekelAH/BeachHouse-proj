@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
@@ -20,7 +20,7 @@ const MAX_GUESTS = 20
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
-  phone: z.string().optional(),
+  phone: z.string().min(7, 'Please enter a valid phone number').optional().or(z.literal('')),
   date: z.string().min(1, 'Please select a date'),
   guests: z.number().min(1, 'At least 1 guest is required').max(MAX_GUESTS),
 })
@@ -42,7 +42,7 @@ export default function PatioRent() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { guests: 0 },
+    defaultValues: { name: '', email: '', phone: '', date: '', guests: 0 },
   })
 
   const guestCount = watch('guests') || 0
@@ -86,7 +86,11 @@ export default function PatioRent() {
         : 'border-navy/15 bg-white focus:border-primary'
     }`
 
-  const todayStr = new Date().toISOString().split('T')[0]
+  const [todayStr, setTodayStr] = useState('')
+  useEffect(() => {
+    const d = new Date()
+    setTodayStr(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`)
+  }, [])
 
   return (
     <section id="patio" className="py-20 md:py-32 bg-white">
@@ -169,15 +173,15 @@ export default function PatioRent() {
                 <label htmlFor="patio-name" className="block text-navy font-medium text-sm mb-1.5">
                   Full Name <span className="text-red-400">*</span>
                 </label>
-                <motion.input
-                  id="patio-name"
-                  type="text"
-                  placeholder="Your full name"
-                  {...register('name')}
-                  animate={errors.name ? { x: [-4, 4, -4, 4, 0] } : {}}
-                  transition={{ duration: 0.3 }}
-                  className={inputClass(!!errors.name)}
-                />
+                <motion.div animate={errors.name ? { x: [-4, 4, -4, 4, 0] } : {}} transition={{ duration: 0.3 }}>
+                  <input
+                    id="patio-name"
+                    type="text"
+                    placeholder="Your full name"
+                    {...register('name')}
+                    className={inputClass(!!errors.name)}
+                  />
+                </motion.div>
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
                 )}
@@ -186,66 +190,71 @@ export default function PatioRent() {
                 <label htmlFor="patio-email" className="block text-navy font-medium text-sm mb-1.5">
                   Email Address <span className="text-red-400">*</span>
                 </label>
-                <motion.input
-                  id="patio-email"
-                  type="email"
-                  placeholder="your@email.com"
-                  {...register('email')}
-                  animate={errors.email ? { x: [-4, 4, -4, 4, 0] } : {}}
-                  transition={{ duration: 0.3 }}
-                  className={inputClass(!!errors.email)}
-                />
+                <motion.div animate={errors.email ? { x: [-4, 4, -4, 4, 0] } : {}} transition={{ duration: 0.3 }}>
+                  <input
+                    id="patio-email"
+                    type="email"
+                    placeholder="your@email.com"
+                    {...register('email')}
+                    className={inputClass(!!errors.email)}
+                  />
+                </motion.div>
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
                 )}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               <div>
                 <label htmlFor="patio-phone" className="block text-navy font-medium text-sm mb-1.5">
                   Phone <span className="text-navy/40 font-normal">(optional)</span>
                 </label>
-                <input
-                  id="patio-phone"
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                  {...register('phone')}
-                  className={inputClass(false)}
-                />
+                <motion.div animate={errors.phone ? { x: [-4, 4, -4, 4, 0] } : {}} transition={{ duration: 0.3 }}>
+                  <input
+                    id="patio-phone"
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    {...register('phone')}
+                    className={inputClass(!!errors.phone)}
+                  />
+                </motion.div>
+                {errors.phone && (
+                  <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
+                )}
               </div>
               <div>
                 <label htmlFor="patio-date" className="block text-navy font-medium text-sm mb-1.5">
                   Date <span className="text-red-400">*</span>
                 </label>
-                <motion.input
-                  id="patio-date"
-                  type="date"
-                  min={todayStr}
-                  {...register('date')}
-                  animate={errors.date ? { x: [-4, 4, -4, 4, 0] } : {}}
-                  transition={{ duration: 0.3 }}
-                  className={inputClass(!!errors.date)}
-                />
+                <motion.div animate={errors.date ? { x: [-4, 4, -4, 4, 0] } : {}} transition={{ duration: 0.3 }}>
+                  <input
+                    id="patio-date"
+                    type="date"
+                    min={todayStr || undefined}
+                    {...register('date')}
+                    className={inputClass(!!errors.date)}
+                  />
+                </motion.div>
                 {errors.date && (
                   <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>
                 )}
               </div>
-              <div>
+              <div className="sm:col-span-2 md:col-span-1">
                 <label htmlFor="patio-guests" className="block text-navy font-medium text-sm mb-1.5">
                   Number of Guests <span className="text-red-400">*</span>
                 </label>
-                <motion.input
-                  id="patio-guests"
-                  type="number"
-                  min={1}
-                  max={MAX_GUESTS}
-                  placeholder="e.g. 4"
-                  {...register('guests', { valueAsNumber: true })}
-                  animate={errors.guests ? { x: [-4, 4, -4, 4, 0] } : {}}
-                  transition={{ duration: 0.3 }}
-                  className={inputClass(!!errors.guests)}
-                />
+                <motion.div animate={errors.guests ? { x: [-4, 4, -4, 4, 0] } : {}} transition={{ duration: 0.3 }}>
+                  <input
+                    id="patio-guests"
+                    type="number"
+                    min={1}
+                    max={MAX_GUESTS}
+                    placeholder="e.g. 4"
+                    {...register('guests', { valueAsNumber: true })}
+                    className={inputClass(!!errors.guests)}
+                  />
+                </motion.div>
                 {errors.guests && (
                   <p className="text-red-500 text-xs mt-1">{errors.guests.message}</p>
                 )}

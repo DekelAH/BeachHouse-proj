@@ -73,7 +73,7 @@ export default function About() {
               whileInView={{ opacity: 1, scale: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute -bottom-6 -right-4 sm:right-6 bg-secondary text-navy p-5 rounded-2xl shadow-xl"
+              className="absolute -bottom-6 right-2 sm:right-6 bg-secondary text-navy p-5 rounded-2xl shadow-xl"
             >
               <p className="font-heading text-3xl font-bold leading-none">12+</p>
               <p className="text-xs font-bold uppercase tracking-wider mt-1">Years of Joy</p>

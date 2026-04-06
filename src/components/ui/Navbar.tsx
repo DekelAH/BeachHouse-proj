@@ -32,11 +32,11 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-hidden ${
           scrolled ? 'py-3 bg-navy/90 backdrop-blur-md shadow-xl' : 'py-5 bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between max-w-full">
           <a
             href="#"
             className="relative z-10 flex-shrink-0"
@@ -53,12 +53,12 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-white/90 hover:text-secondary font-medium text-sm uppercase tracking-widest transition-colors duration-200"
+                className="text-white/90 hover:text-secondary font-medium text-xs xl:text-sm uppercase tracking-widest transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -70,7 +70,7 @@ export default function Navbar() {
             href="#patio"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="hidden lg:block bg-secondary hover:bg-secondary-dark text-navy font-bold px-6 py-2.5 rounded-full text-xs uppercase tracking-widest transition-colors duration-200"
+            className="hidden lg:block bg-secondary hover:bg-secondary-dark text-navy font-bold px-4 xl:px-6 py-2.5 rounded-full text-xs uppercase tracking-wider xl:tracking-widest transition-colors duration-200 whitespace-nowrap"
           >
             Rent Our Patio
           </motion.a>

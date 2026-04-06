@@ -18,12 +18,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
   background-color: #F5F1E8;
   color: #1E3A4A;
+  overflow-x: hidden;
 }
 
 h1,
@@ -82,4 +84,12 @@ h6 {
 
 .animate-scroll-bounce {
   animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
