@@ -114,7 +114,7 @@ export default function Reviews() {
 
   const variants = {
     enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 80 : -80 }),
-    center: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+    center: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' as const } },
     exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -80 : 80, transition: { duration: 0.3 } }),
   }
 
