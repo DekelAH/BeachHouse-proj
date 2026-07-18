@@ -343,9 +343,6 @@ export default function PatioRent() {
                                   <span className="font-heading text-sm text-navy font-semibold truncate">
                                     {item.name}
                                   </span>
-                                  <span className="text-primary font-bold text-sm flex-shrink-0">
-                                    {item.price}
-                                  </span>
                                 </div>
                                 <p className="text-navy/50 text-xs truncate">{item.description}</p>
                               </div>
