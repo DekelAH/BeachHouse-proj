@@ -1,48 +1,14 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { fadeInUp, slideInLeft, slideInRight, stagger } from '@/lib/animations'
-
-const stats = [
-  { value: 12, suffix: '+', label: 'Years Open' },
-  { value: 50, suffix: 'K+', label: 'Happy Guests' },
-  { value: 80, suffix: '+', label: 'Menu Items' },
-  { value: 4.9, suffix: '★', label: 'Avg. Rating' },
-]
-
-function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true })
-  const count = useMotionValue(0)
-  const springCount = useSpring(count, { stiffness: 40, damping: 18 })
-  const display = useTransform(springCount, (latest) => {
-    if (value % 1 !== 0) return latest.toFixed(1)
-    return Math.round(latest).toString()
-  })
-
-  useEffect(() => {
-    if (isInView) count.set(value)
-  }, [isInView, count, value])
-
-  return (
-    <div ref={ref} className="flex items-start justify-center">
-      <motion.span className="font-heading text-4xl md:text-5xl font-bold text-primary leading-none">
-        {display}
-      </motion.span>
-      <span className="font-heading text-2xl md:text-3xl font-bold text-secondary mt-1 ml-0.5">
-        {suffix}
-      </span>
-    </div>
-  )
-}
+import { fadeInUp, slideInLeft, stagger } from '@/lib/animations'
 
 export default function About() {
   return (
     <section id="about" className="py-20 md:py-32 bg-sand overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Image side */}
           <motion.div
             variants={slideInLeft}
@@ -53,31 +19,14 @@ export default function About() {
           >
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/30 to-navy/50">
               <Image
-                src="/images/gallery/cafe-exterior.jpg"
-                alt="The Beach House Café terrace and team"
+                src="/images/gallery/about_us.jpg"
+                alt="The Beach House Café"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  target.style.display = 'none'
-                }}
               />
-              {/* Decorative frame */}
               <div className="absolute inset-4 border-2 border-white/20 rounded-2xl pointer-events-none" />
             </div>
-
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, x: 20 }}
-              whileInView={{ opacity: 1, scale: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute -bottom-6 right-2 sm:right-6 bg-secondary text-navy p-5 rounded-2xl shadow-xl"
-            >
-              <p className="font-heading text-3xl font-bold leading-none">12+</p>
-              <p className="text-xs font-bold uppercase tracking-wider mt-1">Years of Joy</p>
-            </motion.div>
           </motion.div>
 
           {/* Text side */}
@@ -103,32 +52,39 @@ export default function About() {
               <span className="text-primary italic">Meets the Table</span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-navy/70 text-base md:text-lg leading-relaxed">
-              Born from a love of the sea and a passion for fresh, honest food, The Beach House
-              Café has been a beloved coastal gathering place for over a decade. We source our
-              ingredients daily from local fishermen and nearby farms, so every bite carries the
-              soul of the shore.
+              Tucked along the waterfront, The Beach House Café was built on one simple belief -
+              that good food tastes better with a view. From our first espresso served to full tables of families watching the sun melt into the water,
+              we have grown into something far more than a café.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-navy/70 text-base md:text-lg leading-relaxed">
-              Whether you're watching the sunrise over your morning coffee or sharing a sunset
-              dinner with loved ones, our doors — and our hearts — are always open.
+              We share our home with Lifeways Indigenous Artistry, a gallery celebrating the living
+              culture and craftsmanship of the local community. This partnership shapes who we are -
+              a place where people gather, stories are exchanged, and every visit feels like coming
+              back to something real.
+            </motion.p>
+            <motion.p variants={fadeInUp} className="text-navy/70 text-base md:text-lg leading-relaxed">
+              Our kitchen draws from many traditions. You'll find freshly baked pastries alongside
+              shawarma plates, salmon bagels, and homemade baklava - a menu as open and welcoming
+              as the coastline outside our windows. Everything is made with care, and the sea is
+              never far from sight.
+            </motion.p>
+            <motion.p variants={fadeInUp} className="text-navy/70 text-base md:text-lg leading-relaxed">
+              Whether you stop in for a morning coffee, a long lunch on the patio, or a quiet dinner
+              as the water turns gold - we're glad you found us.
             </motion.p>
 
-            {/* Stats grid */}
+            {/* Values */}
             <motion.div
-              variants={stagger}
-              className="grid grid-cols-2 gap-6 mt-4 pt-6 border-t border-navy/10"
+              variants={fadeInUp}
+              className="flex items-center gap-6 pt-4 border-t border-navy/10"
             >
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  variants={fadeInUp}
-                  className="flex flex-col items-center text-center gap-1"
-                >
-                  <Counter value={stat.value} suffix={stat.suffix} />
-                  <p className="text-navy/60 text-xs uppercase tracking-widest font-medium">
-                    {stat.label}
-                  </p>
-                </motion.div>
+              {['Community', 'Craft', 'Coast'].map((value, i) => (
+                <div key={value} className="flex items-center gap-6">
+                  <span className="text-navy font-heading text-sm uppercase tracking-[0.2em] font-semibold">
+                    {value}
+                  </span>
+                  {i < 2 && <span className="text-primary/40 text-lg">·</span>}
+                </div>
               ))}
             </motion.div>
           </motion.div>

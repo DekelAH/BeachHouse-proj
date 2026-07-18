@@ -127,37 +127,37 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
           {/* Contact info */}
           <motion.div
             variants={slideInLeft}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-6 h-full"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-5">
               {contactInfo.map((item) => (
                 <motion.div
                   key={item.label}
-                  whileHover={{ y: -3 }}
-                  className="bg-white rounded-2xl p-5 shadow-sm border border-navy/5 flex gap-4 items-start"
+                  whileHover={{ x: 4 }}
+                  className="flex gap-4 items-center"
                 >
-                  <div className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-11 h-11 bg-primary/10 text-primary rounded-xl flex items-center justify-center flex-shrink-0">
                     {item.icon}
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-navy/50 text-xs uppercase tracking-wider font-medium mb-0.5">
                       {item.label}
                     </p>
-                    <p className="text-navy font-medium text-sm">{item.value}</p>
+                    <p className="text-navy font-medium text-sm break-words">{item.value}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Map placeholder */}
-            <div className="rounded-2xl overflow-hidden shadow-md h-52 bg-primary/10 relative">
+            {/* Map */}
+            <div className="rounded-2xl overflow-hidden shadow-md flex-1 min-h-48 bg-primary/10 relative">
               <iframe
                 src="https://maps.google.com/maps?q=beach+cafe&output=embed"
                 width="100%"
