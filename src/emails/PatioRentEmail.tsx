@@ -93,8 +93,7 @@ export default function PatioRentEmail({
                       <Text style={guestLabel}>Guest {guestNum}</Text>
                       {items.map((item) => (
                         <Text key={item!.id} style={mealItem}>
-                          · {item!.name}{' '}
-                          <span style={mealPrice}>{item!.price}</span>
+                          · {item!.name}
                         </Text>
                       ))}
                     </Section>
