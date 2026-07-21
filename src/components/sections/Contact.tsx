@@ -27,7 +27,7 @@ const contactInfo = [
       </svg>
     ),
     label: 'Location',
-    value: '1 Oceanfront Drive, Beachside',
+    value: '5109 Cordova Bay Rd, Victoria, BC V8Y 2K1',
   },
   {
     icon: (
@@ -159,7 +159,7 @@ export default function Contact() {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden shadow-md flex-1 min-h-48 bg-primary/10 relative">
               <iframe
-                src="https://maps.google.com/maps?q=beach+cafe&output=embed"
+                src="https://maps.google.com/maps?q=5109+Cordova+Bay+Rd%2C+Victoria%2C+BC+V8Y+2K1&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
