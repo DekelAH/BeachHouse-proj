@@ -9,8 +9,6 @@ const schema = z.object({
   email: z.string().email(),
   phone: z.string().min(7).optional().or(z.literal('')),
   date: z.string().min(1),
-  guests: z.number().min(1).max(20),
-  guestSelections: z.record(z.string(), z.array(z.number())),
 })
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -24,10 +22,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid form data' }, { status: 400 })
     }
 
-    const { name, email, phone, date, guests, guestSelections } = parsed.data
+    const { name, email, phone, date } = parsed.data
     const toEmail = process.env.RESEND_TO_EMAIL ?? 'hello@beachhousecafe.com'
 
-    const html = await render(PatioRentEmail({ name, email, phone, date, guests, guestSelections }))
+    const html = await render(PatioRentEmail({ name, email, phone, date }))
 
     await resend.emails.send({
       from: 'The Beach House Café <onboarding@resend.dev>',

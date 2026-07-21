@@ -10,15 +10,12 @@ import {
   Hr,
   Preview,
 } from '@react-email/components'
-import { menuItems } from '@/lib/menuData'
 
 interface PatioRentEmailProps {
   name: string
   email: string
   phone?: string
   date: string
-  guests: number
-  guestSelections: Record<string, number[]>
 }
 
 export default function PatioRentEmail({
@@ -26,11 +23,7 @@ export default function PatioRentEmail({
   email,
   phone,
   date,
-  guests,
-  guestSelections,
 }: PatioRentEmailProps) {
-  const guestEntries = Object.entries(guestSelections).filter(([, ids]) => ids.length > 0)
-
   return (
     <Html lang="en">
       <Head />
@@ -71,43 +64,6 @@ export default function PatioRentEmail({
               <Text style={label}>Date</Text>
               <Text style={value}>{date}</Text>
             </Section>
-            <Hr style={divider} />
-
-            <Section style={fieldRow}>
-              <Text style={label}>Number of Guests</Text>
-              <Text style={value}>{guests}</Text>
-            </Section>
-
-            {guestEntries.length > 0 && (
-              <>
-                <Hr style={dividerHeavy} />
-                <Heading as="h3" style={mealsTitle}>Pre-Selected Meals</Heading>
-                {guestEntries.map(([guestIndex, ids]) => {
-                  const guestNum = Number(guestIndex) + 1
-                  const items = ids
-                    .map((id) => menuItems.find((m) => m.id === id))
-                    .filter(Boolean)
-
-                  return (
-                    <Section key={guestIndex} style={guestBlock}>
-                      <Text style={guestLabel}>Guest {guestNum}</Text>
-                      {items.map((item) => (
-                        <Text key={item!.id} style={mealItem}>
-                          · {item!.name}
-                        </Text>
-                      ))}
-                    </Section>
-                  )
-                })}
-              </>
-            )}
-
-            {guestEntries.length === 0 && (
-              <>
-                <Hr style={dividerHeavy} />
-                <Text style={noMeals}>No meals pre-selected.</Text>
-              </>
-            )}
           </Section>
 
           <Section style={footer}>
@@ -191,47 +147,6 @@ const linkStyle = {
 const divider = {
   borderColor: '#C9A46A30',
   margin: '12px 0',
-}
-
-const dividerHeavy = {
-  borderColor: '#C9A46A60',
-  margin: '20px 0',
-}
-
-const mealsTitle = {
-  color: '#1E3A4A',
-  fontSize: '16px',
-  marginBottom: '16px',
-}
-
-const guestBlock = {
-  marginBottom: '16px',
-}
-
-const guestLabel = {
-  color: '#4F8FA8',
-  fontSize: '13px',
-  fontWeight: 'bold',
-  textTransform: 'uppercase' as const,
-  letterSpacing: '1px',
-  margin: '0 0 6px',
-}
-
-const mealItem = {
-  color: '#1E3A4A',
-  fontSize: '14px',
-  margin: '2px 0',
-}
-
-const mealPrice = {
-  color: '#C9A46A',
-  fontWeight: 'bold',
-}
-
-const noMeals = {
-  color: '#1E3A4A80',
-  fontSize: '14px',
-  fontStyle: 'italic',
 }
 
 const footer = {

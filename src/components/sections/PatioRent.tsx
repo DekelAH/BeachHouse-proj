@@ -1,28 +1,44 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { fadeInUp, stagger, scaleIn } from '@/lib/animations'
-import { menuItems } from '@/lib/menuData'
 
 const patioImages = [
-  { src: '/images/patio/patio-1.png', alt: 'Beachfront patio with ocean views and string lights' },
-  { src: '/images/patio/patio-2.png', alt: 'Dining setup with fresh seafood and cocktails' },
-  { src: '/images/patio/patio-3.png', alt: 'Evening ambiance with warm lighting at sunset' },
+  { src: '/images/patio/patio09.jpeg', alt: 'Private patio dining tables overlooking the ocean' },
+  { src: '/images/patio/patio10.jpeg', alt: 'Elegant oceanfront patio table set for a private event' },
+  { src: '/images/patio/patio08.jpeg', alt: 'Formal outdoor dining table prepared for patio guests' },
+  { src: '/images/patio/patio07.jpeg', alt: 'Catered buffet spread beside the beach' },
+  { src: '/images/patio/patio05.jpeg', alt: 'Artisan charcuterie board served with an ocean view' },
+  { src: '/images/patio/patio01.jpeg', alt: 'Abundant charcuterie and appetizer spread on the patio' },
+  { src: '/images/patio/patio02.jpeg', alt: 'Fresh falafel platter prepared for a private gathering' },
+  { src: '/images/patio/patio03.jpeg', alt: 'Decorative hummus platter with lemon and herbs' },
+  { src: '/images/patio/patio04.jpeg', alt: 'Grilled kebabs and vegetables served for patio dining' },
+  { src: '/images/patio/patio06.jpeg', alt: 'Grilled chicken and saffron rice buffet dishes' },
 ]
 
-const MAX_GUESTS = 20
+const patioImagePositions = [
+  'lg:col-start-1 lg:row-start-1',
+  'lg:col-start-2 lg:row-start-1',
+  'lg:col-start-3 lg:row-start-1',
+  'lg:col-start-1 lg:row-start-2',
+  'lg:col-start-3 lg:row-start-2',
+  'lg:col-start-1 lg:row-start-3',
+  'lg:col-start-3 lg:row-start-3',
+  'lg:col-start-1 lg:row-start-4',
+  'lg:col-start-2 lg:row-start-4',
+  'lg:col-start-3 lg:row-start-4',
+]
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().min(7, 'Please enter a valid phone number').optional().or(z.literal('')),
   date: z.string().min(1, 'Please select a date'),
-  guests: z.number().min(1, 'At least 1 guest is required').max(MAX_GUESTS),
 })
 
 type FormData = z.infer<typeof schema>
@@ -30,32 +46,17 @@ type SubmitState = 'idle' | 'loading' | 'success' | 'error'
 
 export default function PatioRent() {
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
-  const [activeGuestTab, setActiveGuestTab] = useState(0)
-  const [guestSelections, setGuestSelections] = useState<Record<number, number[]>>({})
   const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { name: '', email: '', phone: '', date: '', guests: 0 },
+    defaultValues: { name: '', email: '', phone: '', date: '' },
   })
-
-  const guestCount = watch('guests') || 0
-
-  const toggleMenuItem = (guestIndex: number, itemId: number) => {
-    setGuestSelections((prev) => {
-      const current = prev[guestIndex] || []
-      const updated = current.includes(itemId)
-        ? current.filter((id) => id !== itemId)
-        : [...current, itemId]
-      return { ...prev, [guestIndex]: updated }
-    })
-  }
 
   const onSubmit = async (data: FormData) => {
     setSubmitState('loading')
@@ -63,13 +64,11 @@ export default function PatioRent() {
       const res = await fetch('/api/patio-rent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, guestSelections }),
+        body: JSON.stringify(data),
       })
       if (res.ok) {
         setSubmitState('success')
         reset()
-        setGuestSelections({})
-        setActiveGuestTab(0)
       } else {
         setSubmitState('error')
       }
@@ -86,11 +85,10 @@ export default function PatioRent() {
         : 'border-navy/15 bg-white focus:border-primary'
     }`
 
-  const [todayStr, setTodayStr] = useState('')
-  useEffect(() => {
+  const [todayStr] = useState(() => {
     const d = new Date()
-    setTodayStr(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`)
-  }, [])
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  })
 
   return (
     <section id="patio" className="py-20 md:py-32 bg-white">
@@ -116,29 +114,32 @@ export default function PatioRent() {
             Rent Our Patio
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-navy/60 max-w-xl mx-auto text-base md:text-lg">
-            Host your next gathering on our stunning beachfront patio. Choose your date, invite your
-            guests, and pre-select meals from our menu.
+            Host your next gathering on our stunning beachfront patio. Share your contact details and
+            preferred date, and our team will help plan the rest.
           </motion.p>
         </motion.div>
 
-        {/* Photo gallery */}
+        {/* Patio images surrounding the centered form */}
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-16"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(380px,1.1fr)_minmax(0,1fr)] lg:grid-rows-[14rem_14rem_14rem_14rem] lg:gap-5 xl:gap-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {patioImages.map((img, i) => (
-              <motion.div
+          <div className="contents">
+            {patioImages.slice(0, 3).map((img, i) => (
+              <motion.button
                 key={img.src}
+                type="button"
                 variants={scaleIn}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
                 onClick={() => setActiveImageIndex(i)}
-                className={`relative h-56 md:h-72 rounded-2xl overflow-hidden shadow-md cursor-pointer ring-2 transition-all duration-300 ${
+                aria-label={`Select patio photo ${i + 1}: ${img.alt}`}
+                aria-pressed={activeImageIndex === i}
+                className={`relative h-56 overflow-hidden rounded-2xl shadow-md ring-2 transition-all duration-300 sm:h-64 lg:h-full ${patioImagePositions[i]} ${
                   activeImageIndex === i
-                    ? 'ring-primary shadow-xl scale-[1.02]'
+                    ? 'ring-primary shadow-xl'
                     : 'ring-transparent hover:shadow-lg'
                 }`}
               >
@@ -146,29 +147,28 @@ export default function PatioRent() {
                   src={img.src}
                   alt={img.alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
                 />
-              </motion.div>
+              </motion.button>
             ))}
           </div>
-        </motion.div>
 
-        {/* Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
-        >
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="w-full sm:col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-2 lg:row-span-2 lg:h-full"
+          >
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="bg-sand rounded-3xl p-6 sm:p-10 shadow-lg border border-navy/5 flex flex-col gap-6"
+            className="bg-sand rounded-3xl p-6 sm:p-8 shadow-lg border border-navy/5 flex flex-col gap-6 lg:h-full lg:justify-center"
           >
             {/* Contact fields row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 gap-5">
               <div>
                 <label htmlFor="patio-name" className="block text-navy font-medium text-sm mb-1.5">
                   Full Name <span className="text-red-400">*</span>
@@ -205,7 +205,7 @@ export default function PatioRent() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 gap-5">
               <div>
                 <label htmlFor="patio-phone" className="block text-navy font-medium text-sm mb-1.5">
                   Phone <span className="text-navy/40 font-normal">(optional)</span>
@@ -240,121 +240,7 @@ export default function PatioRent() {
                   <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>
                 )}
               </div>
-              <div className="sm:col-span-2 md:col-span-1">
-                <label htmlFor="patio-guests" className="block text-navy font-medium text-sm mb-1.5">
-                  Number of Guests <span className="text-red-400">*</span>
-                </label>
-                <motion.div animate={errors.guests ? { x: [-4, 4, -4, 4, 0] } : {}} transition={{ duration: 0.3 }}>
-                  <input
-                    id="patio-guests"
-                    type="number"
-                    min={1}
-                    max={MAX_GUESTS}
-                    placeholder="e.g. 4"
-                    {...register('guests', { valueAsNumber: true })}
-                    className={inputClass(!!errors.guests)}
-                  />
-                </motion.div>
-                {errors.guests && (
-                  <p className="text-red-500 text-xs mt-1">{errors.guests.message}</p>
-                )}
-              </div>
             </div>
-
-            {/* Per-guest food selection */}
-            <AnimatePresence>
-              {guestCount > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-2">
-                    <p className="text-navy font-medium text-sm mb-3">
-                      Select meals for each guest
-                    </p>
-
-                    {/* Guest tabs */}
-                    <div className="flex gap-2 mb-5 overflow-x-auto pb-2 scrollbar-none">
-                      {Array.from({ length: Math.min(guestCount, MAX_GUESTS) }, (_, i) => (
-                        <motion.button
-                          key={i}
-                          type="button"
-                          onClick={() => setActiveGuestTab(i)}
-                          whileTap={{ scale: 0.95 }}
-                          className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer ${
-                            activeGuestTab === i
-                              ? 'bg-primary text-white shadow-lg'
-                              : 'bg-white text-navy hover:bg-primary/10 border border-navy/10'
-                          }`}
-                        >
-                          Guest {i + 1}
-                          {(guestSelections[i]?.length ?? 0) > 0 && (
-                            <span className="ml-1.5 bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">
-                              {guestSelections[i].length}
-                            </span>
-                          )}
-                        </motion.button>
-                      ))}
-                    </div>
-
-                    {/* Menu items for active guest */}
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeGuestTab}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.25 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 gap-3"
-                      >
-                        {menuItems.map((item) => {
-                          const selected = guestSelections[activeGuestTab]?.includes(item.id) ?? false
-                          return (
-                            <motion.button
-                              key={item.id}
-                              type="button"
-                              onClick={() => toggleMenuItem(activeGuestTab, item.id)}
-                              whileTap={{ scale: 0.97 }}
-                              className={`flex items-center gap-3 p-3 rounded-xl border-2 text-left transition-all duration-200 cursor-pointer ${
-                                selected
-                                  ? 'border-primary bg-primary/5 shadow-sm'
-                                  : 'border-navy/10 bg-white hover:border-primary/30'
-                              }`}
-                            >
-                              {/* Checkbox indicator */}
-                              <div
-                                className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
-                                  selected
-                                    ? 'bg-primary border-primary'
-                                    : 'border-navy/20 bg-white'
-                                }`}
-                              >
-                                {selected && (
-                                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                  </svg>
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-center gap-2">
-                                  <span className="font-heading text-sm text-navy font-semibold truncate">
-                                    {item.name}
-                                  </span>
-                                </div>
-                                <p className="text-navy/50 text-xs truncate">{item.description}</p>
-                              </div>
-                            </motion.button>
-                          )
-                        })}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Submit */}
             <motion.button
@@ -381,6 +267,38 @@ export default function PatioRent() {
                 : 'Submit Patio Rental Request'}
             </motion.button>
           </form>
+          </motion.div>
+
+          <div className="contents">
+            {patioImages.slice(3).map((img, i) => {
+              const imageIndex = i + 3
+
+              return (
+                <motion.button
+                  key={img.src}
+                  type="button"
+                  variants={scaleIn}
+                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  onClick={() => setActiveImageIndex(imageIndex)}
+                  aria-label={`Select patio photo ${imageIndex + 1}: ${img.alt}`}
+                  aria-pressed={activeImageIndex === imageIndex}
+                  className={`relative h-56 overflow-hidden rounded-2xl shadow-md ring-2 transition-all duration-300 sm:h-64 lg:h-full ${patioImagePositions[imageIndex]} ${
+                    activeImageIndex === imageIndex
+                      ? 'ring-primary shadow-xl'
+                      : 'ring-transparent hover:shadow-lg'
+                  }`}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </motion.button>
+              )
+            })}
+          </div>
         </motion.div>
       </div>
     </section>
