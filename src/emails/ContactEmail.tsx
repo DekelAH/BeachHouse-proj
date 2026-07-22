@@ -22,7 +22,7 @@ export default function ContactEmail({ name, email, phone, message }: ContactEma
   return (
     <Html lang="en">
       <Head />
-      <Preview>New message from {name} — Beach House Café</Preview>
+      <Preview>New message from {name} - Beach House Café</Preview>
       <Body style={body}>
         <Container style={container}>
           <Section style={header}>

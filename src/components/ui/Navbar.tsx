@@ -40,7 +40,7 @@ export default function Navbar() {
           <a
             href="#"
             className="relative z-10 flex-shrink-0"
-            aria-label="The Beach House Café — Home"
+            aria-label="The Beach House Café - Home"
           >
             <Image
               src="/logo.png"

@@ -263,7 +263,7 @@ export default function PatioRent() {
                 : submitState === 'success'
                 ? '✓ Request Sent!'
                 : submitState === 'error'
-                ? 'Something went wrong — try again'
+                ? 'Something went wrong - try again'
                 : 'Submit Patio Rental Request'}
             </motion.button>
           </form>

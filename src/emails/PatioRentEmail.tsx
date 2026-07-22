@@ -27,7 +27,7 @@ export default function PatioRentEmail({
   return (
     <Html lang="en">
       <Head />
-      <Preview>Patio Rental Request from {name} — {date}</Preview>
+      <Preview>Patio Rental Request from {name} - {date}</Preview>
       <Body style={body}>
         <Container style={container}>
           <Section style={header}>

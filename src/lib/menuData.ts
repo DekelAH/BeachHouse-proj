@@ -43,7 +43,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 5,
     name: 'Bacon & Cheese Bun',
-    description: 'A golden flaky spiral bun layered with crispy bacon and melted cheese — warm, savory, and deeply satisfying',
+    description: 'A golden flaky spiral bun layered with crispy bacon and melted cheese - warm, savory, and deeply satisfying',
     image: '/images/menu/menu_bacon_cheese_bagel.jpg',
     badge: null,
     color: 'from-yellow-200/50 to-amber-200/50',
@@ -51,7 +51,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 6,
     name: 'Baklava',
-    description: 'Honey-soaked phyllo rolls topped with crushed pistachios, arranged on a marble serving tray — sweet and aromatic',
+    description: 'Honey-soaked phyllo rolls topped with crushed pistachios, arranged on a marble serving tray - sweet and aromatic',
     image: '/images/menu/menu_baklava.jpg',
     badge: 'House Special',
     color: 'from-amber-300/50 to-yellow-200/50',

@@ -284,7 +284,7 @@ export default function Contact() {
                   : submitState === 'success'
                   ? '✓ Message Sent!'
                   : submitState === 'error'
-                  ? 'Something went wrong — try again'
+                  ? 'Something went wrong - try again'
                   : 'Send Message'}
               </motion.button>
             </form>
