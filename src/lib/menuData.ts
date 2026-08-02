@@ -53,7 +53,7 @@ export const menuItems: MenuItem[] = [
     name: 'Sea Breeze Baklava',
     description: 'Honey-glazed phyllo rolls with a rich chocolate and nut filling, scattered with whole pistachios and a dark chocolate swipe',
     image: '/images/menu/menu_baklava_chocolate.jpg',
-    badge: 'New',
+    badge: 'House Special',
     color: 'from-amber-800/20 to-amber-600/30',
   },
   {
