@@ -51,21 +51,13 @@ export const menuItems: MenuItem[] = [
   {
     id: 6,
     name: 'Sea Breeze Baklava',
-    description: 'Flaky baklava filled with Nutella, peanut butter and walnuts, finished with a pistachio topping.',
-    image: '/images/menu/menu_baklava.jpg',
-    badge: 'House Special',
-    color: 'from-amber-300/50 to-yellow-200/50',
-  },
-  {
-    id: 7,
-    name: 'Chocolate Baklava',
     description: 'Honey-glazed phyllo rolls with a rich chocolate and nut filling, scattered with whole pistachios and a dark chocolate swipe',
     image: '/images/menu/menu_baklava_chocolate.jpg',
     badge: 'New',
     color: 'from-amber-800/20 to-amber-600/30',
   },
   {
-    id: 8,
+    id: 7,
     name: 'Almond Pastry',
     description: 'A light, flaky pastry filled with rich almond cream and baked until golden.',
     image: '/images/menu/menu_almond_pastry.jpg',
@@ -73,7 +65,7 @@ export const menuItems: MenuItem[] = [
     color: 'from-yellow-100/50 to-amber-200/40',
   },
   {
-    id: 9,
+    id: 8,
     name: 'Chocolate Croissant',
     description: 'A buttery, flaky croissant filled with rich chocolate and baked until golden.',
     image: '/images/menu/menu_chocolate_pastry.jpg',
