@@ -20,35 +20,36 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://beachhousecafe.com'
   ),
   title: {
-    default: 'The Beach House Café | Fresh Bites by the Shore',
+    default: 'The Beach House Café | Cordova Bay, Victoria BC',
     template: '%s | The Beach House Café',
   },
   description:
-    'Experience the finest coastal dining at The Beach House Café. Fresh food, stunning sea views, and warm hospitality right where the waves meet the shore.',
+    'Waterfront café in Cordova Bay, Victoria BC. Fresh food, ocean views, and patio rentals at 5109 Cordova Bay Rd — where the sea meets the shore.',
   keywords: [
-    'beach cafe',
-    'coastal restaurant',
-    'seaside dining',
-    'beach house cafe',
-    'fresh seafood',
-    'ocean view restaurant',
-    'beachside dining',
-    'coastal cuisine',
+    'Beach House Café Cordova Bay',
+    'Cordova Bay cafe',
+    'Victoria BC cafe',
+    'Cordova Bay restaurant',
+    'waterfront cafe Victoria',
+    'patio rental Cordova Bay',
+    'beach cafe Victoria BC',
+    'seaside dining Victoria',
   ],
   openGraph: {
-    title: 'The Beach House Café | Fresh Bites by the Shore',
+    title: 'The Beach House Café | Cordova Bay, Victoria BC',
     description:
-      'Fresh food and stunning views by the sea. Come dine with us at The Beach House Café.',
-    images: [{ url: '/images/gallery/cafe-exterior.jpg', width: 1200, height: 630 }],
+      'Fresh food and ocean views in Cordova Bay, Victoria. Dine with us or rent our beachfront patio.',
+    images: [{ url: '/images/gallery/cafe_exterior_02.jpg', width: 1200, height: 630 }],
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_CA',
     siteName: 'The Beach House Café',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Beach House Café',
-    description: 'Fresh food and stunning views by the sea.',
-    images: ['/images/gallery/cafe-exterior.jpg'],
+    title: 'The Beach House Café | Cordova Bay, Victoria BC',
+    description:
+      'Fresh food and ocean views in Cordova Bay, Victoria. Dine with us or rent our beachfront patio.',
+    images: ['/images/gallery/cafe_exterior_02.jpg'],
   },
   robots: {
     index: true,

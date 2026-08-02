@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Menu', href: '#menu' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'About', href: '#about' },
-  { label: 'Reviews', href: '#reviews' },
+  // { label: 'Reviews', href: '#reviews' },
   { label: 'Patio', href: '#patio' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -43,11 +43,11 @@ export default function Navbar() {
             aria-label="The Beach House Café - Home"
           >
             <Image
-              src="/logo.png"
+              src="/logo2.png"
               alt="The Beach House Café"
-              width={140}
-              height={46}
-              className="h-10 w-auto"
+              width={64}
+              height={64}
+              className="h-16 w-16 rounded-full object-contain bg-[#f7f3ec]"
               priority
             />
           </a>

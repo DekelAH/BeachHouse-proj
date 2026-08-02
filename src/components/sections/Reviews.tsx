@@ -1,3 +1,4 @@
+// Temporarily disabled — uncomment import + <Reviews /> in page.tsx (and nav links) to restore
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

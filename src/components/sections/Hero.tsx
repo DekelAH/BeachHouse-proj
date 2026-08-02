@@ -50,13 +50,13 @@ export default function Hero() {
 
           <motion.div
             variants={fadeInUp}
-            className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto items-center"
           >
             <motion.a
               href="#menu"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-secondary hover:bg-secondary-dark text-navy font-bold px-8 py-4 rounded-full text-sm uppercase tracking-widest transition-colors duration-300 text-center"
+              className="bg-secondary hover:bg-secondary-dark text-navy font-bold px-8 py-4 rounded-full text-sm uppercase tracking-widest transition-colors duration-300"
             >
               View Our Menu
             </motion.a>
@@ -72,10 +72,33 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — hand on sm/md, mouse on lg+ */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
-        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
+        <span className="text-white/50 text-xs uppercase tracking-widest lg:hidden">Swipe</span>
+        <span className="hidden lg:inline text-white/50 text-xs uppercase tracking-widest">Scroll</span>
+
+        {/* Hand (touch) — visible below lg */}
+        <svg
+          className="w-8 h-8 text-white/60 animate-scroll-bounce lg:hidden"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 11V6a2 2 0 10-4 0v.5" />
+          <path d="M14 10.5V4a2 2 0 10-4 0v7.5" />
+          <path d="M10 10.5V6a2 2 0 10-4 0v8" />
+          <path d="M18 11a2 2 0 012 2v2a6 6 0 01-6 6h-2a6 6 0 01-6-6v-3.5a2 2 0 014 0" />
+        </svg>
+
+        {/* Mouse — visible lg+ */}
+        <div
+          className="hidden lg:flex w-6 h-10 border-2 border-white/40 rounded-full justify-center pt-2"
+          aria-hidden="true"
+        >
           <div className="w-1 h-2.5 bg-white/60 rounded-full animate-scroll-bounce" />
         </div>
       </div>
