@@ -51,6 +51,10 @@ export const metadata: Metadata = {
       'Fresh food and ocean views in Cordova Bay, Victoria. Dine with us or rent our beachfront patio.',
     images: ['/images/gallery/cafe_exterior_02.jpg'],
   },
+  icons: {
+    icon: [{ url: '/logo-icon.png', type: 'image/png' }],
+    apple: [{ url: '/logo-icon.png', type: 'image/png' }],
+  },
   robots: {
     index: true,
     follow: true,
