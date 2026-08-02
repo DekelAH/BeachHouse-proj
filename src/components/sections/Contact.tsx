@@ -50,7 +50,7 @@ const contactInfo = [
       </svg>
     ),
     label: 'Email',
-    value: 'hello@beachhousecafe.com',
+    value: 'info@thebeachhousecafe.ca',
   },
 ]
 
