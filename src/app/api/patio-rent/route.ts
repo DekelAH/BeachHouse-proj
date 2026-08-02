@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, email, phone, date } = parsed.data
-    const toEmail = process.env.RESEND_TO_EMAIL ?? 'hello@beachhousecafe.com'
+    const toEmail = process.env.RESEND_TO_EMAIL ?? 'info@beachhousecafe.com'
 
     const html = await render(PatioRentEmail({ name, email, phone, date }))
 
