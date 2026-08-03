@@ -24,16 +24,24 @@ export async function POST(req: NextRequest) {
 
     const { name, email, phone, message } = parsed.data
     const toEmail = process.env.RESEND_TO_EMAIL ?? 'info@thebeachhousecafe.ca'
+    const fromEmail =
+      process.env.RESEND_FROM_EMAIL ??
+      'The Beach House Café <noreply@thebeachhousecafe.ca>'
 
     const html = await render(ContactEmail({ name, email, phone, message }))
 
-    await resend.emails.send({
-      from: 'The Beach House Café <onboarding@resend.dev>',
+    const { error } = await resend.emails.send({
+      from: fromEmail,
       to: toEmail,
       replyTo: email,
       subject: `New message from ${name} — Beach House Café`,
       html,
     })
+
+    if (error) {
+      console.error('Contact Resend error:', error)
+      return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {
