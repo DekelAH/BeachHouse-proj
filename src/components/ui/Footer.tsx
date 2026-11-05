@@ -73,9 +73,9 @@ export default function Footer() {
             <h3 className="text-secondary font-bold text-xs uppercase tracking-widest mb-3">
               Hours
             </h3>
-            <p className="text-white font-medium text-sm">Monday – Thursday: 07:00 – 17:00</p>
+            <p className="text-white font-medium text-sm">Monday – Thursday: 08:00 – 15:00</p>
             <p className="text-white font-medium text-sm mb-8">
-              Friday – Sunday (Summer only): 07:00 – 19:00
+              Friday – Sunday: 08:00 – 19:00
             </p>
             <h3 className="text-secondary font-bold text-xs uppercase tracking-widest mb-5">
               Follow Us
