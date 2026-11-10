@@ -38,8 +38,8 @@ const contactInfo = [
     label: 'Hours',
     value: (
       <>
-        <span className="block">Monday - Thursday: 08:00 - 15:00</span>
-        <span className="block">Friday - Sunday: 08:00 - 19:00</span>
+        <span className="block">Monday - Wednesday: 08:00 - 15:00</span>
+        <span className="block">Thursday - Sunday: 08:00 - 19:00</span>
       </>
     ),
   },

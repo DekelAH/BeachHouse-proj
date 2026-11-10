@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/ui/Navbar'
+import StructuredData from '@/components/StructuredData'
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.thebeachhousecafe.ca'
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -16,15 +20,16 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://beachhousecafe.com'
-  ),
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'The Beach House Café | Cordova Bay, Victoria BC',
     template: '%s | The Beach House Café',
   },
   description:
-    'Waterfront café in Cordova Bay, Victoria BC. Fresh food, ocean views, and patio rentals at 5109 Cordova Bay Rd — where the sea meets the shore.',
+    'The Beach House Café is a waterfront café in Cordova Bay, Victoria BC. Coffee, fresh food, ocean views, and beachfront patio rentals at 5109 Cordova Bay Rd — where the sea meets the shore.',
   keywords: [
     'Beach House Café Cordova Bay',
     'Cordova Bay cafe',
@@ -72,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+        <StructuredData siteUrl={SITE_URL} />
         <Navbar />
         {children}
       </body>

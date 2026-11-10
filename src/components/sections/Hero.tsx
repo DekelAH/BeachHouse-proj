@@ -44,8 +44,8 @@ export default function Hero() {
             variants={fadeInUp}
             className="text-white/80 text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed"
           >
-            Fresh food, stunning coastal views, and warm hospitality - right where the sea meets
-            the shore.
+            A waterfront café in Cordova Bay, Victoria BC - fresh food, great coffee, and
+            stunning ocean views right where the sea meets the shore.
           </motion.p>
 
           <motion.div
