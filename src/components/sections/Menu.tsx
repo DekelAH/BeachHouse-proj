@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { fadeInUp, stagger, scaleIn } from '@/lib/animations'
 import { menuItems } from '@/lib/menuData'
+import { TOAST_ORDER_URL } from '@/lib/constants'
 
 export default function Menu() {
   return (
@@ -75,6 +76,33 @@ export default function Menu() {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Order CTA */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex flex-col items-center gap-4 mt-14"
+        >
+          <motion.p
+            variants={fadeInUp}
+            className="text-navy/60 text-base md:text-lg"
+          >
+            Ready to eat? Order for pickup.
+          </motion.p>
+          <motion.a
+            variants={fadeInUp}
+            href={TOAST_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="bg-secondary hover:bg-secondary-dark text-navy font-bold px-10 py-4 rounded-full text-sm uppercase tracking-widest transition-colors duration-300"
+          >
+            Order Online
+          </motion.a>
         </motion.div>
       </div>
     </section>
