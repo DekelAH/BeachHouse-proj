@@ -1,3 +1,5 @@
+export type MenuCategory = 'Breakfast' | 'Lunch' | 'Pizza' | 'Pastries & Desserts'
+
 export interface MenuItem {
   id: number
   name: string
@@ -5,6 +7,7 @@ export interface MenuItem {
   image: string
   badge: string | null
   color: string
+  category: MenuCategory
 }
 
 export const menuItems: MenuItem[] = [
@@ -13,6 +16,7 @@ export const menuItems: MenuItem[] = [
 
   {
     id: 1,
+    category: 'Breakfast',
     name: 'Bacon Egg & Cheese Croissant',
     description:
       'Crispy bacon, a freshly cooked egg and melted smoked cheddar on a warm, buttery croissant. Toasted until golden.',
@@ -22,6 +26,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 2,
+    category: 'Breakfast',
     name: 'Sausage Egg & Cheese Croissant',
     description:
       'A warm, buttery croissant filled with savoury breakfast sausage, a fluffy egg, and melted smoked cheddar cheese. Toasted until golden.',
@@ -31,6 +36,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 3,
+    category: 'Breakfast',
     name: 'Egg & Cheese Croissant',
     description:
       'A warm, buttery croissant filled with a freshly cooked egg and rich, melted smoked cheddar cheese. Simple, comforting, and delicious.',
@@ -40,6 +46,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 4,
+    category: 'Breakfast',
     name: 'Cream Cheese Bagel',
     description:
       'A freshly toasted bagel generously spread with smooth, creamy cream cheese. A timeless breakfast classic.',
@@ -49,6 +56,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 5,
+    category: 'Breakfast',
     name: 'Smoked Salmon Cream Cheese Bagel',
     description:
       'A freshly toasted bagel topped with smooth cream cheese and delicate smoked salmon. A delicious coastal breakfast favourite.',
@@ -58,6 +66,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 6,
+    category: 'Breakfast',
     name: 'Hashbrown',
     description:
       'Crispy golden hash brown, cooked to a perfect crunch on the outside and fluffy on the inside.',
@@ -70,6 +79,7 @@ export const menuItems: MenuItem[] = [
 
   {
     id: 7,
+    category: 'Lunch',
     name: 'Single Smash Burger',
     description:
       'A juicy smashed beef patty with crispy caramelized edges, melted smoked cheddar, fresh lettuce, tomato, and our signature Beach House sauce on a toasted bun.',
@@ -79,6 +89,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 8,
+    category: 'Lunch',
     name: 'Double Smash Burger',
     description:
       'Double the beef, double the flavour! Two juicy smashed beef patties with crispy caramelized edges, melted smoked cheddar, fresh lettuce, tomato, and our signature Beach House sauce.',
@@ -88,6 +99,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 9,
+    category: 'Lunch',
     name: 'Chicken Shawarma Bowl',
     description:
       'Spiced chicken strips with golden tahini drizzle, turmeric rice, fresh tomato & cucumber salad, and creamy hummus.',
@@ -97,6 +109,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 10,
+    category: 'Lunch',
     name: 'Falafel Bowl',
     description:
       'Crispy golden falafel served with aromatic turmeric rice, hummus, fresh salad and tahini sauce.',
@@ -106,6 +119,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 11,
+    category: 'Lunch',
     name: 'Shawarma Fries',
     description:
       'Golden crispy fries loaded with spiced shawarma chicken, drizzled with tahini and served with dipping sauces.',
@@ -115,6 +129,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 12,
+    category: 'Lunch',
     name: 'Double Smash Combo',
     description:
       'Two juicy smashed beef patties topped with smoked cheddar and fresh toppings, served with golden, crispy fries. The ultimate Beach House meal.',
@@ -124,6 +139,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 13,
+    category: 'Lunch',
     name: 'Straight-Cut Fries',
     description:
       'Golden, crispy fries with a fluffy centre, cooked to perfection and served hot. Perfect as a side or enjoyed on their own.',
@@ -136,6 +152,7 @@ export const menuItems: MenuItem[] = [
 
   {
     id: 14,
+    category: 'Pizza',
     name: 'Margherita Pizza',
     description:
       'A classic wood-fired pizza with rich tomato sauce and a generous layer of golden, bubbling mozzarella on a hand-stretched crust.',
@@ -145,6 +162,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 15,
+    category: 'Pizza',
     name: 'Pepperoni Pizza',
     description:
       'Loaded with crispy, golden-edged pepperoni slices over melted mozzarella and a rich tomato base on a wood-fired crust.',
@@ -154,6 +172,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 16,
+    category: 'Pizza',
     name: 'Hawaiian Pizza',
     description:
       'Smoky ham, sweet pineapple chunks and red onion over melted mozzarella and a golden wood-fired base.',
@@ -163,6 +182,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 17,
+    category: 'Pizza',
     name: 'Meat Lovers Pizza',
     description:
       'A hearty wood-fired pizza loaded with salami, seasoned ground beef and colourful peppers over rich tomato sauce and melted mozzarella.',
@@ -172,6 +192,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 18,
+    category: 'Pizza',
     name: 'Garden Veggie Pizza',
     description:
       'A vibrant wood-fired pizza piled with mushrooms, olives, bell peppers and red onion over tomato sauce and melted mozzarella.',
@@ -181,6 +202,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 19,
+    category: 'Pizza',
     name: 'Chicken Pesto Pizza',
     description:
       'Tender chicken, cherry tomatoes and vibrant pesto drizzled over melted mozzarella on a wood-fired crust.',
@@ -193,6 +215,7 @@ export const menuItems: MenuItem[] = [
 
   {
     id: 20,
+    category: 'Pastries & Desserts',
     name: 'Blueberry Muffin',
     description:
       'A soft, moist muffin bursting with juicy blueberries and topped with a golden, buttery crumble. A delicious treat with your morning coffee.',
@@ -202,6 +225,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 21,
+    category: 'Pastries & Desserts',
     name: 'Almond Croissant',
     description:
       'A buttery, flaky croissant baked twice for an irresistible golden crunch, filled with rich almond cream and topped with sliced almonds and powdered sugar.',
@@ -211,6 +235,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 22,
+    category: 'Pastries & Desserts',
     name: 'Chocolate Croissant',
     description:
       'A buttery, flaky croissant baked twice until golden and crispy, filled with rich chocolate cream and topped with a decadent chocolate dusting.',
@@ -220,6 +245,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 23,
+    category: 'Pastries & Desserts',
     name: 'Cookie',
     description:
       'A golden-baked chocolate chip cookie with rich, melty chocolate chunks, lightly crisp edges, and a delicious buttery flavour.',
@@ -229,6 +255,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 24,
+    category: 'Pastries & Desserts',
     name: 'Sea Breeze Baklava',
     description:
       'Layers of crispy, golden phyllo pastry filled with rich, creamy Nutella and peanut butter, baked to flaky perfection.',
@@ -238,6 +265,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 25,
+    category: 'Pastries & Desserts',
     name: 'Vegan Choco Espresso Banana Muffin',
     description:
       'A rich, moist vegan banana muffin infused with bold espresso and decadent chocolate. Perfectly balanced with natural banana sweetness.',
@@ -247,6 +275,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 26,
+    category: 'Pastries & Desserts',
     name: 'Blueberry Scone',
     description:
       'A golden-baked scone bursting with juicy blueberries, with a lightly crisp exterior and a soft, tender centre.',
@@ -256,6 +285,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 27,
+    category: 'Pastries & Desserts',
     name: 'Pistachio Croissant',
     description:
       'A buttery, flaky croissant baked twice to golden perfection, filled with rich pistachio cream and topped with a luscious pistachio glaze.',
@@ -265,6 +295,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 28,
+    category: 'Pastries & Desserts',
     name: 'Cinnamon Bun',
     description:
       'A soft, fluffy cinnamon bun swirled with rich cinnamon sugar, baked until golden brown and generously topped with a sweet, creamy glaze.',
@@ -274,6 +305,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 29,
+    category: 'Pastries & Desserts',
     name: 'Croissant Flight',
     description:
       'A tasting selection of our three signature croissants — almond, chocolate, and pistachio — baked fresh and served together.',
@@ -283,6 +315,7 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 30,
+    category: 'Pastries & Desserts',
     name: 'Chive Cheddar Scone',
     description:
       'A savoury, golden-baked scone packed with sharp cheddar and fresh chives, with a flaky exterior and a soft, tender crumb.',
