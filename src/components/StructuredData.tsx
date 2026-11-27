@@ -54,7 +54,7 @@ export default function StructuredData({ siteUrl }: { siteUrl: string }) {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Thursday', 'Friday', 'Saturday', 'Sunday'],
         opens: '08:00',
-        closes: '19:00',
+        closes: '20:00',
       },
     ],
     sameAs: [
